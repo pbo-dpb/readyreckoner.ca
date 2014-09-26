@@ -1,8 +1,11 @@
 webshim.setOptions({
   'forms-ext': {
-    replaceUI: 'auto'
+    replaceUI: 'true'
   , types: 'range'
+  , range: {
+      classes: 'show-ticklabels'
+    }
   }
 });
 
-webshim.polyfill('forms-ext');
+webshim.polyfill('forms forms-ext');
