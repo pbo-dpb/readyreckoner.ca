@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery_ujs
-//= require polyfiller.js
 
 jQuery(function ($) {
   // Scrollspy
