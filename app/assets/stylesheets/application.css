@@ -13,3 +13,80 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  position: relative; /* scrollspy */
+}
+
+#banner {
+  background-color: #103e70;
+}
+
+header {
+  margin-top: 80px;
+  text-align: center;
+}
+h1 {
+  margin-top: 0;
+  font-size: 48px;
+}
+.lead {
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#simulator {
+  margin-top: 80px;
+}
+table {
+  margin-bottom: 40px;
+}
+caption {
+  text-align: left;
+}
+.table thead tr th {
+  font-size: 16px;
+  border-bottom: 0;
+}
+.table thead tr .section {
+  padding-left: 0;
+}
+.table tbody tr td {
+  border-top: 0;
+}
+.table tbody tr .question {
+  padding-left: 15px;
+}
+.column {
+  width: 25%;
+}
+
+footer {
+  margin-bottom: 80px;
+  text-align: center;
+}
+
+#sidebar {
+  font-size: 13px;
+}
+#sidebar.affix {
+  position: fixed;
+  top: 0;
+  padding-right: 15px;
+}
+#sidebar .nav li a:hover,
+#sidebar .nav li a:focus {
+  padding-left: 14px;
+  border-left: 1px solid #103e70;
+  background-color: transparent;
+  color: #103e70;
+}
+#sidebar .nav .active a:hover,
+#sidebar .nav .active a:focus,
+#sidebar .nav .active a {
+  padding-left: 13px;
+  border-left: 2px solid #103e70;
+  color: #103e70;
+  font-weight: 700;
+}

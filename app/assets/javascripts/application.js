@@ -10,7 +10,29 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require_tree .
+//= require polyfiller.js
+
+jQuery(function ($) {
+  // Scrollspy
+  $(document.body).scrollspy({
+    target: '#sidebar'
+  });
+  $(window).on('load', function () {
+    $(document.body).scrollspy('refresh');
+  });
+
+  // Affix
+  setTimeout(function () {
+    $('#sidebar').affix({
+      offset: {
+        top: function () {
+          return (this.top = $('#sidebar').offset().top);
+        }
+      , bottom: function () {
+          return (this.bottom = $('footer').outerHeight(true));
+        }
+      }
+    });
+  }, 100);
+});
