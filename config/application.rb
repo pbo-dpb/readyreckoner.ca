@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Readyreckoner
+module ReadyReckoner
   class Application < Rails::Application
     config.i18n.available_locales = ['en-CA', 'fr-CA']
     config.i18n.default_locale = 'en-CA'
