@@ -6,6 +6,11 @@
 <title><%= _('Ready Reckoner') %></title>
 <meta name="description" content="<%= _('Provides a starting point for parliamentarians and the general public to broadly estimate the revenue impacts of adjustments to the federal tax system.') %>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<% I18n.available_locales.each do |locale| %>
+  <% unless I18n.locale == locale %>
+<link rel="alternate" hreflang="<%= locale.downcase %>" href="<%= root_url %>?locale=<%= locale %>" />
+  <% end %>
+<% end %>
 <%= stylesheet_link_tag 'application', media: 'all' %>
 <%= csrf_meta_tags %>
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
