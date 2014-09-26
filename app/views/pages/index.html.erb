@@ -1,2 +1,83 @@
-<h1>Pages#index</h1>
-<p>Find me in app/views/pages/index.html.erb</p>
+<div id="banner">
+  <%= image_tag 'header.jpg', size: '768x113', alt: _('Parliamentary Budget Officer'), class: 'img-responsive center-block' %>
+</div>
+
+<div class="container-fluid">
+  <%= form_tag print_path, method: 'post' do %>
+
+  <header>
+    <h1><%= _('Ready Reckoner') %></h1>
+
+    <%= simple_format(_("The Parliamentary Budget Officer has prepared this tool to allow parliamentarians and the general public to broadly estimate the revenue impacts of adjustments to the federal tax system."), class: 'lead') %>
+  </header>
+
+  <div class="row" id="simulator">
+    <div class="col-sm-9" role="main">
+      <% @simulator.sections.each_with_index do |section,index| %>
+        <table class="table">
+          <% if index.zero? %>
+            <caption class="text-muted">
+              <%= _('All revenue impacts in millions') %>
+            </caption>
+          <% end %>
+          <thead>
+            <tr id="<%= section.title.parameterize %>">
+              <th class="section">
+                <%= section.title %>
+              </th>
+              <th class="text-center impact-column">
+                <% if same_step?(section) %>
+                  <span class="hidden-xs hidden-sm">
+                    <%= _('Impact per %{step} change') % {step: format(section.questions[0], :step)} %>
+                  </span>
+                  <span class="hidden-md hidden-lg">
+                    <%= _('per %{step} change') % {step: format(section.questions[0], :step)} %>
+                  </span>
+                <% end %>
+              </th>
+              <th class="text-center widget-column">
+                <%= _('Your choice') %>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% section.questions.each do |question| %>
+              <tr>
+                <td class="question">
+                  <%= question.name %>
+                </td>
+                <td class="text-center impact-column">
+                  <%= number_to_currency(question.unit_value * question.step / 1_000_000.0, strip_insignificant_zeros: true) %>
+                </td>
+                <td class="widget widget-column">
+                  <%= range(question) %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+    <div class="col-sm-3">
+      <div class="hidden-print hidden-xs" role="complementary" id="sidebar">
+        <ul class="nav">
+          <% @simulator.sections.each do |section| %>
+            <li>
+              <a href="#<%= section.title.parameterize %>"><%= section.title %></a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p id="impacts-summary"></p>
+
+    <p>
+      <%= button_tag _('Print a PDF report of your changes'), class: 'btn btn-primary btn-lg' %>
+    </p>
+  </footer>
+
+  <% end %>
+</div>
