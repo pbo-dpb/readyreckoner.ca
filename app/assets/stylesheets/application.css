@@ -18,8 +18,27 @@ body {
   position: relative; /* scrollspy */
 }
 
+#locale {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 15px;
+}
+#locale a,
+#locale a:hover,
+#locale a:focus {
+  color: #fff;
+}
+
 #banner {
   background-color: #103e70;
+}
+
+#locales {
+  margin-top: 80px;
+}
+#locales h1 {
+  margin-bottom: 40px;
 }
 
 header {

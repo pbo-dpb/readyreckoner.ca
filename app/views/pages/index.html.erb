@@ -1,5 +1,9 @@
-<div id="banner">
-  <%= image_tag 'header.jpg', size: '768x113', alt: _('Parliamentary Budget Officer'), class: 'img-responsive center-block' %>
+<div id="locale">
+  <% I18n.available_locales.each do |locale| %>
+    <% unless I18n.locale == locale %>
+      <%= link_to _(locale), root_path(locale: locale) %>
+    <% end %>
+  <% end %>
 </div>
 
 <div class="container-fluid">
