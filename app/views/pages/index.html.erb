@@ -12,7 +12,7 @@
   <header>
     <h1><%= _('Ready Reckoner') %></h1>
 
-    <%= simple_format(_("The Parliamentary Budget Officer has prepared this tool to allow parliamentarians and the general public to broadly estimate the revenue impacts of adjustments to the federal tax system."), class: 'lead') %>
+    <%= simple_format(_("The Parliamentary Budget Officer has prepared this tool to allow parliamentarians and the general public to broadly estimate the revenue impacts of changes to the federal tax system."), class: 'lead') %>
   </header>
 
   <div class="row" id="simulator">
@@ -71,16 +71,16 @@
             </li>
           <% end %>
         </ul>
+
+        <%# @todo add impact statement %>
       </div>
     </div>
   </div>
 
   <footer>
-    <p id="impacts-summary"></p>
+    <div id="impacts-summary"></div>
 
-    <p>
-      <%= button_tag _('Print a PDF report of your changes'), class: 'btn btn-primary btn-lg' %>
-    </p>
+    <%= button_tag _('Print a PDF report of your changes'), class: 'btn btn-primary btn-lg' %>
   </footer>
 
   <% end %>

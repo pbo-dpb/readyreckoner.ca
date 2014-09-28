@@ -104,6 +104,12 @@ footer {
   margin-bottom: 80px;
   text-align: center;
 }
+.alert-info {
+  max-width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 18px;
+}
 .btn-lg {
   font-size: 16px;
   font-weight: 500;
@@ -196,6 +202,10 @@ footer {
     content: '';
   }
 
+  .alert-info {
+    max-width: 100%;
+    font-size: 14px;
+  }
   .btn-lg {
     font-size: 14px;
     font-weight: 500;
