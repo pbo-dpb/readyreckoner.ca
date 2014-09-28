@@ -14,6 +14,10 @@ gem 'gettext'
 gem 'rails-i18n', '~> 4.0.0'
 gem 'devise-i18n', '~> 0.10.4'
 
+# PDF generation
+gem 'prawn'
+gem 'prawn-table'
+
 group :development do
   gem 'spring'
 end
