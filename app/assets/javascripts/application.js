@@ -10,8 +10,10 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery_ujs
-//= require jed
+// http://getbootstrap.com/customize/ with only Affix and Scrollspy.
+//
+//= require bootstrap.min.js
+//= require jed.js
 
 var i18n = new Jed({});
 
@@ -61,6 +63,7 @@ function variables() {
 }
 
 $.getJSON('/translations/export/?locale=' + $('html').attr('lang')).done(function (messages) {
+  // Load the translations via AJAX.
   i18n = new Jed({locale_data: {messages: messages}});
 }).always(function () {
   $(function () {
@@ -87,29 +90,30 @@ $.getJSON('/translations/export/?locale=' + $('html').attr('lang')).done(functio
     }, 100);
 
     $('input[type="range"]').change(function () {
+      // Display a message.
       var message
         , number = solution(variables())
         , options = {number: number_to_currency(Math.abs(number))};
 
       if (number > 0) {
-        message = _('Your changes would increase revenues by %(number)s.', options);
+        message = _('Your changes would <em>increase</em> revenues by %(number)s.', options);
       }
       else if (number < 0) {
-        message = _('Your changes would decrease revenues by %(number)s.', options);
+        message = _('Your changes would <em>decrease</em> revenues by %(number)s.', options);
       }
       else {
         message = '';
       }
 
       if (message) {
-        $('#impacts-summary').html($('<div class="alert alert-info" role="alert">' + message + '</div>'));
+        $('#impacts-summary,#impacts-sidebar').html($('<div class="alert alert-info" role="alert">' + message + '</div>'));
       }
       else {
-        $('#impacts-summary').empty();
+        $('#impacts-summary,#impacts-sidebar').empty();
       }
     }).each(function () {
-      var $this = $(this);
       // Reset the simulator on refresh.
+      var $this = $(this);
       $this.val($this.attr('value'));
     });
   });

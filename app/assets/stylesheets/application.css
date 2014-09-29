@@ -104,11 +104,16 @@ footer {
   margin-bottom: 80px;
   text-align: center;
 }
-.alert-info {
+#impacts-summary {
   max-width: 70%;
   margin-left: auto;
   margin-right: auto;
   font-size: 18px;
+}
+#impacts-sidebar {
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
 }
 .btn-lg {
   font-size: 16px;
