@@ -21,7 +21,10 @@ module ApplicationHelper
 
     options = ActiveSupport::SafeBuffer.new
     (minimum..maximum).step(step) do |value|
-      options << content_tag('option', nil, value: value, label: value_formatter(question).call(value))
+      # Only display labels for default, minimum and maximum, to avoid crowding.
+      if [minimum, default_value, maximum].include?(value)
+        options << content_tag('option', nil, value: value, label: value_formatter(question).call(value))
+      end
     end
 
     tag(:input, {
