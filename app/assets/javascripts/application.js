@@ -107,6 +107,8 @@ $.getJSON('/translations/export/?locale=' + $('html').attr('lang')).done(functio
 
       if (message) {
         $('#impacts-summary,#impacts-sidebar').html($('<div class="alert alert-info" role="alert">' + message + '</div>'));
+        // Pulsate the alert to draw attention.
+        $('#impacts-sidebar').animate({opacity: 0}, 'fast').animate({opacity: 1}, 'fast');
       }
       else {
         $('#impacts-summary,#impacts-sidebar').empty();
