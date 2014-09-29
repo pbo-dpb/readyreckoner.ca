@@ -93,6 +93,9 @@ caption {
   width: 30%;
 }
 
+input[type="range"] {
+  width: 100%;
+}
 .ws-range-ticks[data-label]:after,
 .ws-range-ticks:before {
   min-width: 3.5em;
