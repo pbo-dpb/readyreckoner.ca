@@ -15,7 +15,14 @@
 
 var i18n = new Jed({});
 
-var _ = function (msgid, options) {
+/**
+ * Translates strings.
+ *
+ * @param {String} msgid A string
+ * @param {Object} options Replacement fields
+ * @return {String} Returns the translated string
+ */
+function _(msgid, options) {
   var message = i18n.gettext(msgid);
   if (options == null) {
     return message;
@@ -25,22 +32,32 @@ var _ = function (msgid, options) {
   }
 }
 
-// @see https://github.com/rails/rails/blob/master/activesupport/lib/active_support/number_helper/number_to_currency_converter.rb
-// @see https://github.com/rails/rails/blob/master/activesupport/lib/active_support/number_helper/number_to_delimited_converter.rb
+/**
+ * Formats a number a currency string.
+ *
+ * @param {Float} number A number
+ * @return {String} Returns the number as a currency string
+ * @see https://github.com/rails/rails/blob/master/activesupport/lib/active_support/number_helper/number_to_currency_converter.rb
+ * @see https://github.com/rails/rails/blob/master/activesupport/lib/active_support/number_helper/number_to_delimited_converter.rb
+ */
 function number_to_currency(number) {
   var parts = number.toString().split('.');
   parts[0] = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + _('number.currency.format.delimiter'));
   return _('number.currency.format.format').replace('%n', parts.join(_('number.currency.format.separator'))).replace('%u', _('number.currency.format.unit'));
 }
 
-/* @todo Use simulator's equation */
-function balance() {
-  var balance = 0;
-  $('input[data-unit-value]').each(function () {
+/**
+ * Collects variable values to pass to `solution()`.
+ *
+ * @return {Object} Returns each variable's value
+ */
+function variables() {
+  var variables = {};
+  $('input[type="range"]').each(function () {
     var $this = $(this);
-    balance += $this.data('unit-value') * (parseFloat($this.val()) - $this.data('default-value'));
+    variables[$this.attr('id')] = parseFloat($this.val());
   });
-  return balance;
+  return variables;
 }
 
 $.getJSON('/translations/export/?locale=' + $('html').attr('lang')).done(function (messages) {
@@ -71,7 +88,7 @@ $.getJSON('/translations/export/?locale=' + $('html').attr('lang')).done(functio
 
     $('input[type="range"]').change(function () {
       var message
-        , number = balance()
+        , number = solution(variables())
         , options = {number: number_to_currency(Math.abs(number))};
 
       if (number > 0) {
@@ -93,7 +110,7 @@ $.getJSON('/translations/export/?locale=' + $('html').attr('lang')).done(functio
     }).each(function () {
       var $this = $(this);
       // Reset the simulator on refresh.
-      $this.val($this.data('default-value'));
+      $this.val($this.attr('value'));
     });
   });
 });

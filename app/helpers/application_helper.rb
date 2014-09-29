@@ -25,14 +25,13 @@ module ApplicationHelper
     end
 
     tag(:input, {
+      id: question.machine_name,
       type: 'range',
       min: minimum,
       max: maximum,
       step: step,
       value: default_value,
       list: id,
-      'data-default-value' => default_value,
-      'data-unit-value' => integer(question.unit_value),
     }) +
     content_tag('datalist', content_tag('select', options), id: id)
   end
