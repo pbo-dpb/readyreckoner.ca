@@ -1,6 +1,10 @@
 module ApplicationHelper
   include CitizenBudgetModel::AdminHelper
 
+  # Returns whether all questions in the section use the same step.
+  #
+  # @param [CitizenBudgetModel::Section] section a section
+  # @return [Boolean] whether all questions in the section use the same step
   def same_step?(section)
     expected = section.questions.first.step
     section.questions.drop(1).all? do |question|
@@ -8,10 +12,18 @@ module ApplicationHelper
     end
   end
 
+  # Formats a record's attribute's value.
+  #
+  # @param record a record
+  # @param [Symbol] attribute an attribute of the record
+  # @return [String] a formatted attribute value
   def format(record, attribute)
     value_formatter(record).call(record.send(attribute))
   end
 
+  # @param [CitizenBudgetModel::Question] question a question
+  # @return [ActiveSupport::SafeBuffer] an "input" tag of type "range" with a
+  #   "datalist" tag describing its options
   def range(question)
     id = "#{question.id}-#{question.name.parameterize}"
     minimum = integer(question.minimum)
