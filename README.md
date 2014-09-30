@@ -27,6 +27,27 @@ Copy `lumen/bootstrap.min.css` to `app/assets/stylesheets`.
 
 ## Deployment
 
+### Heroku
+
+    heroku addons:add pgbackups:auto-month
+    heroku addons:add rediscloud
+    heroku addons:add sendgrid
+
     heroku config:set SECRET_KEY_BASE=`bundle exec rake secret`
     heroku config:set ACTION_MAILER_HOST=www.readyreckoner.ca
     heroku config:set DEVISE_MAILER_SENDER=noreply@readyreckoner.ca
+    heroku config:set REDIS_URL=`heroku config:get REDISCLOUD_URL`
+
+In `config/environments/production.rb`:
+
+```ruby
+config.action_mailer.smtp_settings = {
+  address: 'smtp.sendgrid.net',
+  port: '587',
+  authentication: :plain,
+  user_name: ENV['SENDGRID_USERNAME'],
+  password: ENV['SENDGRID_PASSWORD'],
+  domain: 'heroku.com',
+  enable_starttls_auto: true
+}
+```
