@@ -62,7 +62,7 @@ function variables() {
   return variables;
 }
 
-$.getJSON('/translations/export/?locale=' + $('html').attr('lang')).done(function (messages) {
+$.getJSON('/admin/translations/export/?locale=' + $('html').attr('lang')).done(function (messages) {
   // Load the translations via AJAX.
   i18n = new Jed({locale_data: {messages: messages}});
 }).always(function () {
