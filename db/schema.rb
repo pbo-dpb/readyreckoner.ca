@@ -80,8 +80,8 @@ ActiveRecord::Schema.define(version: 20140928165832) do
     t.datetime "updated_at"
     t.string   "title",                           default: "", null: false
     t.text     "description",                     default: "", null: false
-    t.text     "popover",                         default: "", null: false
     t.text     "modal",                           default: "", null: false
+    t.text     "popover",                         default: "", null: false
   end
 
   add_index "citizen_budget_model_section_translations", ["citizen_budget_model_section_id"], name: "index_2b79c59d2a47f33d3e927dae21105b97719ec5c0", using: :btree
@@ -139,19 +139,5 @@ ActiveRecord::Schema.define(version: 20140928165832) do
   add_index "citizen_budget_model_users", ["email"], name: "index_citizen_budget_model_users_on_email", unique: true, using: :btree
   add_index "citizen_budget_model_users", ["organization_id"], name: "index_citizen_budget_model_users_on_organization_id", using: :btree
   add_index "citizen_budget_model_users", ["reset_password_token"], name: "index_citizen_budget_model_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "thing_translations", force: true do |t|
-    t.integer  "thing_id",                null: false
-    t.string   "locale",                  null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name",       default: "", null: false
-  end
-
-  add_index "thing_translations", ["locale"], name: "index_thing_translations_on_locale", using: :btree
-  add_index "thing_translations", ["thing_id"], name: "index_thing_translations_on_thing_id", using: :btree
-
-  create_table "things", force: true do |t|
-  end
 
 end
