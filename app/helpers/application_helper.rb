@@ -41,6 +41,7 @@ module ApplicationHelper
 
     tag(:input, {
       id: question.machine_name,
+      name: "variables[#{question.machine_name}]",
       type: 'range',
       min: minimum,
       max: maximum,
