@@ -131,6 +131,10 @@ footer {
   top: 0;
   padding-right: 15px;
 }
+#sidebar.affix-bottom {
+  position: absolute;
+  padding-right: 15px;
+}
 #sidebar .nav li a:hover,
 #sidebar .nav li a:focus {
   padding-left: 14px;

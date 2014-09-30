@@ -83,7 +83,7 @@ $.getJSON('/translations/export/?locale=' + $('html').attr('lang')).done(functio
             return (this.top = $('#sidebar').offset().top);
           }
         , bottom: function () {
-            return (this.bottom = $('footer').outerHeight(true));
+            return (this.bottom = $('footer').outerHeight(true) + 75);
           }
         }
       });
