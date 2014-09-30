@@ -28,3 +28,5 @@ Copy `lumen/bootstrap.min.css` to `app/assets/stylesheets`.
 ## Deployment
 
     heroku config:set SECRET_KEY_BASE=`bundle exec rake secret`
+    heroku config:set ACTION_MAILER_HOST=www.readyreckoner.ca
+    heroku config:set DEVISE_MAILER_SENDER=noreply@readyreckoner.ca
