@@ -9,7 +9,7 @@ gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
 
 # Engines
-gem 'citizen_budget_model'
+gem 'citizen_budget_model', git: 'https://github.com/opennorth/citizen_budget_model.git'
 gem 'gettext'
 gem 'rails-i18n', '~> 4.0.0'
 gem 'devise-i18n', '~> 0.10.4'
@@ -17,6 +17,7 @@ gem 'devise-i18n', '~> 0.10.4'
 # PDF generation
 gem 'prawn'
 gem 'prawn-table'
+gem 'unicode_utils'
 
 group :development do
   gem 'spring'
