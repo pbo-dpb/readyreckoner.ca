@@ -1,0 +1,10 @@
+fr-CA: # Use non-breaking space.
+  number:
+    format:
+      delimiter: " "
+    currency:
+      format:
+        delimiter: " "
+    precision:
+      format:
+        delimiter: " "
