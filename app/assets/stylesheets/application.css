@@ -98,8 +98,8 @@ input[type="range"] {
 }
 .ws-range-ticks[data-label]:after,
 .ws-range-ticks:before {
-  min-width: 3.5em;
-  margin-left: -1.75em;
+  min-width: 4em;
+  margin-left: -2em;
   font-size: 14px;
 }
 
