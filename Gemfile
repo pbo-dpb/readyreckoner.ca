@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.1.2'
 
 # Rails
 gem 'rails', '4.1.5'
@@ -29,4 +30,5 @@ end
 
 group :production do
   gem 'puma'
+  gem 'rails_12factor'
 end
