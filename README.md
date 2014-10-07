@@ -51,3 +51,9 @@ config.action_mailer.smtp_settings = {
   enable_starttls_auto: true
 }
 ```
+
+## Bugs? Questions?
+
+This repository is on GitHub: [http://github.com/opennorth/readyreckoner.ca](http://github.com/opennorth/readyreckoner.ca), where your contributions, forks, bug reports, feature requests, and feedback are greatly welcomed.
+
+Copyright (c) 2014 Open North Inc., released under the MIT license
