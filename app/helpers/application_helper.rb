@@ -24,6 +24,7 @@ module ApplicationHelper
   # @param [CitizenBudgetModel::Question] question a question
   # @return [ActiveSupport::SafeBuffer] an "input" tag of type "range" with a
   #   "datalist" tag describing its options
+  # @see http://afarkas.github.io/webshim/demos/demos/cfgs/input-range.html
   def range(question)
     id = "#{question.id}-#{question.name.parameterize}"
     minimum = integer(question.minimum)
@@ -32,11 +33,13 @@ module ApplicationHelper
     default_value = integer(question.default_value)
 
     options = ActiveSupport::SafeBuffer.new
-    (minimum..maximum).step(step) do |value|
+    (minimum..maximum).step(step) do |value| # range needs min and max to respect step
       # Only display labels for default, minimum and maximum, to avoid crowding.
+      attributes = {value: value}
       if [minimum, default_value, maximum].include?(value)
-        options << content_tag('option', nil, value: value, label: value_formatter(question).call(value))
+        attributes[:label] = value_formatter(question).call(value)
       end
+      options << content_tag('option', nil, attributes)
     end
 
     tag(:input, {
