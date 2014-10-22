@@ -10,7 +10,11 @@ class Report
   # @param [Hash{Symbol,String=>Float,String}] variables variables
   def initialize(simulator, variables)
     @simulator = simulator
-    @variables = variables
+    @variables = {}
+
+    variables.each do |key,value|
+      @variables[key] = Float(value)
+    end
   end
 
   # Sets the document's margins to one inch.
@@ -25,15 +29,13 @@ class Report
   def generate
     pdf = document # document method is not accessible inside Prawn block
 
-    @variables.each do |key,value|
-      @variables[key] = Float(value)
-    end
-
+    bar_cell_width = 36.0
     default_options = {
       width: margin_box.width, # 468pt, 6.5in
-      column_widths: [180, 72, 72, 72, 72],
+      column_widths: [180, 72, 72, 72, 36, 36],
       cell_style: {
-        borders: [],
+        borders: [], # eliminates black border
+        padding: [5, 0, 5, 0],
       },
     }
 
@@ -42,17 +44,20 @@ class Report
     move_down 20
     text _('All revenue impacts in millions'), align: :center, color: '#999999'
 
-    maximum = 0
+    maximum = 0 # maximum bar value
     @simulator.sections.each do |section|
+      # Header row
       data = [[
-        UnicodeUtils.nfc(section.title),
+        UnicodeUtils.nfc(section.title), # merge diacritics and letters
         _('Default'),
         _('Your choice'),
         _('Impact'),
         '',
+        '',
       ]]
 
-      solutions = []
+      # Data rows
+      solutions = [] # for bar graph
       section.questions.each do |question|
         max = [question.solve(question.minimum).abs, question.solve(question.maximum).abs].max
         if max > maximum
@@ -64,10 +69,11 @@ class Report
         solutions << solution
 
         row = [
-          UnicodeUtils.nfc(question.name),
+          UnicodeUtils.nfc(question.name), # merge diacritics and letters
           value_formatter(question).call(question.default_value),
           value_formatter(question).call(value),
           precision_formatter.call(solution / 1_000_000.0),
+          '',
           '',
         ]
 
@@ -80,23 +86,30 @@ class Report
         columns(1..-1).align = :center
 
         section.questions.each_with_index do |question,index|
-          bar_width = (solutions[index].abs / maximum * 36.0).ceil
-          if solutions[index] < 0
-            filename = 'negative.png'
-            position = 31.0 - bar_width
-          else
-            filename = 'positive.png'
-            position = 31.0
-          end
+          if solutions[index].nonzero?
+            bar_width = (solutions[index].abs / maximum * bar_cell_width).ceil
+            if solutions[index] < 0
+              filename = 'negative.png'
+              position = bar_cell_width - bar_width
+              column = 4
+              border = :right
+            else
+              filename = 'positive.png'
+              position = 0
+              column = 5
+              border = :left
+            end
 
-          # Can't call make_cell from within `table` block.
-          cells[index + 1, 4] = Prawn::Table::Cell.make(pdf, {
-            image: Rails.root.join('app', 'assets', 'images', filename),
-            position: position,
-            image_width: bar_width,
-            image_height: 10,
-            borders: [],
-          })
+            # Can't call make_cell from within `table` block.
+            cells[index + 1, column] = Prawn::Table::Cell.make(pdf, {
+              image: Rails.root.join('app', 'assets', 'images', filename),
+              position: position,
+              image_width: bar_width,
+              image_height: 10,
+              borders: [border],
+              padding: [5, 0, 5, 0],
+            })
+          end
         end
       end
     end
@@ -106,6 +119,7 @@ class Report
       '',
       '',
       precision_formatter.call(@simulator.solve(@variables) / 1_000_000.0),
+      '',
       '',
     ]]
 
