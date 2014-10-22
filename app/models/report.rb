@@ -72,7 +72,7 @@ class Report
           UnicodeUtils.nfc(question.name), # merge diacritics and letters
           value_formatter(question).call(question.default_value),
           value_formatter(question).call(value),
-          precision_formatter.call(solution / 1_000_000.0),
+          currency_formatter.call(solution / 1_000_000.0),
           '',
           '',
         ]
@@ -118,7 +118,7 @@ class Report
       _('Total revenue impacts'),
       '',
       '',
-      precision_formatter.call(@simulator.solve(@variables) / 1_000_000.0),
+      currency_formatter.call(@simulator.solve(@variables) / 1_000_000.0),
       '',
       '',
     ]]
