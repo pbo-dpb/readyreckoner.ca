@@ -6,8 +6,11 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+require 'rack/mobile-detect'
+
 module ReadyReckoner
   class Application < Rails::Application
+    config.middleware.use Rack::MobileDetect
     config.i18n.available_locales = ['en-CA', 'fr-CA']
     config.i18n.default_locale = 'en-CA'
     config.i18n.fallbacks = {'en-CA' => ['en-CA', :en, 'fr-CA', :fr], 'fr-CA' => ['fr-CA', :fr, 'en-CA', :en]}

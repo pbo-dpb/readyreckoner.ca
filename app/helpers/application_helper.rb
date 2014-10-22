@@ -32,11 +32,16 @@ module ApplicationHelper
     step = integer(question.step)
     default_value = integer(question.default_value)
 
+    values_with_labels = [minimum, maximum]
+    unless request.headers['X_MOBILE_DEVICE']
+      values_with_labels.insert(1, default_value)
+    end
+
     options = ActiveSupport::SafeBuffer.new
     (minimum..maximum).step(step) do |value| # range needs min and max to respect step
       # Only display labels for default, minimum and maximum, to avoid crowding.
       attributes = {value: value}
-      if [minimum, default_value, maximum].include?(value)
+      if values_with_labels.include?(value)
         attributes[:label] = value_formatter(question).call(value)
       end
       options << content_tag('option', nil, attributes)

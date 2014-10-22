@@ -20,6 +20,8 @@ gem 'prawn'
 gem 'prawn-table'
 gem 'unicode_utils'
 
+gem 'rack-mobile-detect'
+
 group :development do
   gem 'spring'
 end
