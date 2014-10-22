@@ -112,7 +112,7 @@ $.getJSON('/admin/translations/export/?locale=' + $('html').attr('lang')).done(f
         , css_class = ''
         , number = solution(variables())
         , options = {
-            number: number_to_currency(Math.abs(number / 1000000))
+            number: number_to_currency(Math.round(Math.abs(number / 1000000)))
           , percentage: number_to_percentage(Math.abs(number / total_revenue * 100).toFixed(2))
           };
 
