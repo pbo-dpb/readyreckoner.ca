@@ -93,6 +93,11 @@ caption {
   width: 30%;
 }
 
+.table thead tr th .popover-content {
+  font-weight: normal;
+  font-size: 14px;
+}
+
 input[type="range"] {
   width: 100%;
 }

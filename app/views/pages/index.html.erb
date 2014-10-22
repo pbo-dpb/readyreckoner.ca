@@ -28,6 +28,7 @@
             <tr id="<%= section.title.parameterize %>">
               <th class="section">
                 <%= section.title %>
+                <%= render partial: 'popover', locals: {record: section} %>
               </th>
               <th class="text-center impact-column">
                 <% if same_step?(section) %>
@@ -49,6 +50,7 @@
               <tr>
                 <td class="question">
                   <%= question.name %>
+                  <%= render partial: 'popover', locals: {record: question} %>
                 </td>
                 <td class="text-center impact-column">
                   <%= number_to_currency(question.unit_value * question.step / 1_000_000.0, strip_insignificant_zeros: true) %>

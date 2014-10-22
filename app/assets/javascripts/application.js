@@ -101,10 +101,15 @@ $.getJSON('/admin/translations/export/?locale=' + $('html').attr('lang')).done(f
       });
     }, 100);
 
+    // Popover
+    $('a[data-toggle="popover"]').popover().click(function (event) {
+      event.preventDefault();
+    });
+
     $('input[type="range"]').change(function () {
       // Display a message.
-      var message
-        , css_class
+      var message = ''
+        , css_class = ''
         , number = solution(variables())
         , options = {
             number: number_to_currency(Math.abs(number / 1000000))
@@ -118,9 +123,6 @@ $.getJSON('/admin/translations/export/?locale=' + $('html').attr('lang')).done(f
       else if (number < 0) {
         message = _('Your changes would <em>decrease</em> revenues by %(number)s million, or %(percentage)s of total revenues.', options);
         css_class = 'alert-danger';
-      }
-      else {
-        message = '';
       }
 
       if (message) {
