@@ -3,7 +3,7 @@ webshim.setOptions({
     replaceUI: 'true'
   , types: 'range'
   , range: {
-      classes: 'show-ticklabels'
+      classes: 'show-ticklabels show-activelabeltooltip'
     }
   }
 });
