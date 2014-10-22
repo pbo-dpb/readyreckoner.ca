@@ -224,7 +224,7 @@ footer {
   }
 
   .alert-info,
-  .alert-danger {
+  .alert-warning {
     max-width: 100%;
     font-size: 13px;
   }

@@ -122,7 +122,7 @@ $.getJSON('/admin/translations/export/?locale=' + $('html').attr('lang')).done(f
       }
       else if (number < 0) {
         message = _('Your changes would <em>decrease</em> revenues by %(number)s million, or %(percentage)s of total revenues.', options);
-        css_class = 'alert-danger';
+        css_class = 'alert-warning';
       }
 
       if (message) {
