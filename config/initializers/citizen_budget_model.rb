@@ -4,7 +4,6 @@ CitizenBudgetModel.hidden_fields = {
   ],
   section: [
     :description,
-    :popover,
     :modal,
   ],
   question: [
@@ -18,7 +17,6 @@ CitizenBudgetModel.hidden_fields = {
     :title,
     :description,
     :modal,
-    :popover,
     # HTML
     :required,
     :placeholder,
