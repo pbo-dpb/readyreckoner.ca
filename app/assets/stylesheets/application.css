@@ -176,8 +176,8 @@ footer {
 
 @media (max-width: 767px) {
   caption {
-    margin-left: 32.5%;
-    width: 37.5%;
+    margin-left: 0;
+    width: 100%;
   }
   .impact-column {
     width: 37.5%;
@@ -199,7 +199,7 @@ footer {
     margin-top: 40px;
   }
   h1 {
-    font-size: 40px;
+    font-size: 36px;
   }
   .lead {
     max-width: 100%;
@@ -211,15 +211,21 @@ footer {
 
   .ws-range-ticks[data-label]:after,
   .ws-range-ticks:before {
-    content: '';
+    font-size: 12px;
   }
 
-  .alert-info {
+  #impacts-summary {
     max-width: 100%;
-    font-size: 14px;
+  }
+
+  .alert-info,
+  .alert-danger {
+    max-width: 100%;
+    font-size: 13px;
   }
   .btn-lg {
-    font-size: 14px;
+    width: 100%;
+    font-size: 13px;
     font-weight: 500;
   }
 }
