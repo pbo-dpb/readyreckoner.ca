@@ -17,7 +17,11 @@ Edit `bower_components/bootstrap/less/bootstrap.less` by commenting out:
 * `glyphicons`
 * `code`
 * `forms`
-* all components except `navs` and `alerts`
+* all components except:
+  * `navs`
+  * `alerts`
+  * `tooltips`
+  * `popovers`
 
 Run:
 
