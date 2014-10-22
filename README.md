@@ -14,7 +14,6 @@ From the [Bootswatch docs](http://bootswatch.com/help/#customization):
 
 Edit `bower_components/bootstrap/less/bootstrap.less` by commenting out:
 
-* `glyphicons`
 * `code`
 * `forms`
 * all components except:
@@ -27,7 +26,7 @@ Run:
 
     grunt swatch:lumen
 
-Copy `lumen/bootstrap.min.css` to `app/assets/stylesheets`.
+Copy `lumen/bootstrap.min.css` to `app/assets/stylesheets` and change `../fonts` to `fonts`.
 
 ## Deployment
 
