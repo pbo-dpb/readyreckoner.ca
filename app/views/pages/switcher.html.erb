@@ -1,7 +1,7 @@
 <div class="container-fluid" id="locales">
   <div class="row">
     <% I18n.available_locales.each_with_index do |locale,index| %>
-      <div class="col-xs-6<% if index.even? %> text-right<% end %>">
+      <div class="col-sm-6<% if index.even? %> text-right<% end %>">
         <h1><%= _('Ready Reckoner', locale: locale) %></h1>
 
         <%= link_to _('Enter', locale: locale), root_path(locale: locale), class: 'btn btn-primary btn-lg' %>

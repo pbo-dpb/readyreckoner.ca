@@ -24,6 +24,7 @@ gem 'rack-mobile-detect'
 
 group :development do
   gem 'spring'
+  gem 'pry-rails'
 end
 
 group :development, :test do
