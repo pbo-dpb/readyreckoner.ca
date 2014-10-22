@@ -107,6 +107,10 @@ input[type="range"] {
   margin-left: -2em;
   font-size: 14px;
 }
+.ws-range .ws-range-thumb>span {
+  width: 50px;
+  margin-left: -25px;
+}
 
 footer {
   margin-bottom: 80px;
