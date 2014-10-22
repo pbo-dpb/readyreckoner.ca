@@ -81,7 +81,9 @@ class Report
       end
 
       move_down 20
-      table(data, default_options.merge(header: true)) do
+      # If we set header: true, it's impossible to know which row will break
+      # across the page when drawing the bars.
+      table(data, default_options) do
         row(0).font_style = :bold
         columns(1..-1).align = :center
 
