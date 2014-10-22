@@ -35,7 +35,7 @@ class Report
       column_widths: [180, 72, 72, 72, 36, 36],
       cell_style: {
         borders: [], # eliminates black border
-        padding: [5, 0, 5, 0],
+        padding: [4, 0, 4, 0],
       },
     }
 
@@ -80,7 +80,6 @@ class Report
         data << row
       end
 
-      move_down 20
       # If we set header: true, it's impossible to know which row will break
       # across the page when drawing the bars.
       table(data, default_options) do
@@ -114,6 +113,7 @@ class Report
           end
         end
       end
+      move_down 20
     end
 
     data = [[
@@ -125,9 +125,8 @@ class Report
       '',
     ]]
 
-    move_down(20)
     stroke_horizontal_rule
-    move_down(20)
+    move_down 20
     table(data, default_options) do
       row(0).font_style = :bold
       columns(1..-1).align = :center
