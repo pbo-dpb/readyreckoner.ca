@@ -49,6 +49,18 @@ function number_to_currency(number) {
 }
 
 /**
+ * Formats a number a percentage string.
+ *
+ * @param {Float} number A number
+ * @return {String} Returns the number as a percentage string
+ */
+function number_to_percentage(number) {
+  var parts = number.toString().split('.');
+  parts[0] = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + _('number.percentage.format.delimiter'));
+  return _('number.percentage.format.format').replace('%n', parts.join(_('number.format.separator')));
+}
+
+/**
  * Collects variable values to pass to `solution()`.
  *
  * @return {Object} Returns each variable's value
@@ -92,21 +104,27 @@ $.getJSON('/admin/translations/export/?locale=' + $('html').attr('lang')).done(f
     $('input[type="range"]').change(function () {
       // Display a message.
       var message
+        , css_class
         , number = solution(variables())
-        , options = {number: number_to_currency(Math.abs(number))};
+        , options = {
+            number: number_to_currency(Math.abs(number / 1000000))
+          , percentage: number_to_percentage(Math.abs(number / total_revenue * 100).toFixed(2))
+          };
 
       if (number > 0) {
-        message = _('Your changes would <em>increase</em> revenues by %(number)s.', options);
+        message = _('Your changes would <em>increase</em> revenues by %(number)s million, or %(percentage)s of total revenues.', options);
+        css_class = 'alert-info';
       }
       else if (number < 0) {
-        message = _('Your changes would <em>decrease</em> revenues by %(number)s.', options);
+        message = _('Your changes would <em>decrease</em> revenues by %(number)s million, or %(percentage)s of total revenues.', options);
+        css_class = 'alert-danger';
       }
       else {
         message = '';
       }
 
       if (message) {
-        $('#impacts-summary,#impacts-sidebar').html($('<div class="alert alert-info" role="alert">' + message + '</div>'));
+        $('#impacts-summary,#impacts-sidebar').html($('<div class="alert ' + css_class + '" role="alert">' + message + '</div>'));
         // Pulsate the alert to draw attention.
         $('#impacts-sidebar').animate({opacity: 0}, 'fast').animate({opacity: 1}, 'fast');
       }

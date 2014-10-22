@@ -86,5 +86,8 @@
   <% end %>
 </div>
 
+<script>
+var total_revenue = <%= @simulator.total_revenue %>;
+</script>
 <%= render partial: 'citizen_budget_model/simulators/equation', locals: {equation: @simulator.working_equation} %>
 <%= javascript_include_tag 'application' %>
