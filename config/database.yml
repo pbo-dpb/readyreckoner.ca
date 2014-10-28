@@ -22,4 +22,4 @@ test:
 
 production:
   <<: *default
-  database: ready_reckoner_production
+  url: <%= ENV['DATABASE_URL'] %>
