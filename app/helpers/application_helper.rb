@@ -16,9 +16,10 @@ module ApplicationHelper
   #
   # @param record a record
   # @param [Symbol] attribute an attribute of the record
+  # @param [Hash] options formatting options
   # @return [String] a formatted attribute value
-  def format(record, attribute)
-    value_formatter(record).call(record.send(attribute))
+  def format(record, attribute, options = {})
+    value_formatter(record, options).call(record.send(attribute))
   end
 
   # @param [CitizenBudgetModel::Question] question a question
