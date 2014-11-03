@@ -27,7 +27,16 @@ class Report
   # @see http://prawnpdf.org/manual.pdf
   # @see http://prawnpdf.org/prawn-table-manual.pdf
   def generate
-    pdf = document # document method is not accessible inside Prawn block
+    # Calculate the maximum bar value.
+    maximum = 0
+    @simulator.sections.each do |section|
+      section.questions.each do |question|
+        max = [question.solve(question.minimum).abs, question.solve(question.maximum).abs].max
+        if max > maximum
+          maximum = max
+        end
+      end
+    end
 
     bar_cell_width = 36.0
     default_options = {
@@ -44,7 +53,6 @@ class Report
     move_down 20
     text _('All revenue impacts in millions'), align: :center, color: '#999999'
 
-    maximum = 0 # maximum bar value
     @simulator.sections.each do |section|
       # Header row
       data = [[
@@ -57,24 +65,45 @@ class Report
       ]]
 
       # Data rows
-      solutions = [] # for bar graph
-      section.questions.each do |question|
-        max = [question.solve(question.minimum).abs, question.solve(question.maximum).abs].max
-        if max > maximum
-          maximum = max
-        end
-
+      borders = [] # baselines for bars
+      section.questions.each_with_index do |question,index|
         value = @variables.fetch(question.machine_name)
         solution = question.solve(value)
-        solutions << solution
+
+        bars = ['', '']
+        if solution.nonzero?
+          bar_width = (solution.abs / maximum * bar_cell_width).ceil
+
+          if solution < 0
+            filename = 'negative.png'
+            position = bar_cell_width - bar_width
+            border = :right
+            column = 0
+          else
+            filename = 'positive.png'
+            position = 0
+            border = :left
+            column = 1
+          end
+
+          bars[column] = {
+            image: Rails.root.join('app', 'assets', 'images', filename),
+            image_width: bar_width,
+            image_height: 10,
+            position: position,
+            padding: [4, 0, 4, 0],
+          }
+
+          borders << [column + 4, index + 1, border]
+        end
 
         row = [
           UnicodeUtils.nfc(question.name), # merge diacritics and letters
           value_formatter(question).call(question.default_value),
           value_formatter(question).call(value),
-          currency_formatter.call(solution / 1_000_000.0),
-          '',
-          '',
+          currency_formatter(precision: 0).call(solution / 1_000_000.0),
+          bars[0],
+          bars[1],
         ]
 
         data << row
@@ -86,31 +115,9 @@ class Report
         row(0).font_style = :bold
         columns(1..-1).align = :center
 
-        section.questions.each_with_index do |question,index|
-          if solutions[index].nonzero?
-            bar_width = (solutions[index].abs / maximum * bar_cell_width).ceil
-            if solutions[index] < 0
-              filename = 'negative.png'
-              position = bar_cell_width - bar_width
-              column = 4
-              border = :right
-            else
-              filename = 'positive.png'
-              position = 0
-              column = 5
-              border = :left
-            end
-
-            # Can't call make_cell from within `table` block.
-            cells[index + 1, column] = Prawn::Table::Cell.make(pdf, {
-              image: Rails.root.join('app', 'assets', 'images', filename),
-              position: position,
-              image_width: bar_width,
-              image_height: 10,
-              borders: [border],
-              padding: [5, 0, 5, 0],
-            })
-          end
+        # Setting borders in the cell (above) doesn't seem to work.
+        borders.each do |column,row,border|
+          columns(column).rows(row).borders = [border]
         end
       end
       move_down 20
@@ -120,7 +127,7 @@ class Report
       _('Total revenue impacts'),
       '',
       '',
-      currency_formatter.call(@simulator.solve(@variables) / 1_000_000.0),
+      currency_formatter(precision: 0).call(@simulator.solve(@variables) / 1_000_000.0),
       '',
       '',
     ]]

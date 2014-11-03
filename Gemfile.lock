@@ -72,7 +72,7 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.1)
     locale (2.1.0)
-    mail (2.6.1)
+    mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
     mime-types (2.4.3)
