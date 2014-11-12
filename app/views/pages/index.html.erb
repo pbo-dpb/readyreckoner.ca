@@ -12,7 +12,7 @@
   <header>
     <h1><%= _('Ready Reckoner') %></h1>
 
-    <%= simple_format(_("The Parliamentary Budget Officer has prepared this tool to allow parliamentarians and the general public to broadly estimate the revenue impacts of changes to the federal tax system."), class: 'lead') %>
+    <%= simple_format(_("The Parliamentary Budget Officer has prepared this tool to allow parliamentarians and the general public to broadly estimate the revenue impacts of changes to the federal tax system."), class: 'lead center') %>
   </header>
 
   <div class="row" id="simulator">
@@ -79,10 +79,14 @@
     </div>
   </div>
 
-  <footer>
+  <div class="row" id="submit">
     <div id="impacts-summary"></div>
 
     <%= button_tag _('Print a PDF report of your changes'), class: 'btn btn-primary btn-lg' %>
+  </div>
+
+  <footer>
+    <p class="lead center"><%= _('This analysis is based on <a href="http://www.statcan.gc.ca/microsimulation/spsdm-bdmsps/spsdm-bdmsps-eng.htm">SPSD/M</a>. The assumptions and calculations underlying the simulation results were prepared by the PBO and the responsibility for the use and interpretation of these data is entirely that of the authors. The user interface was developed by <a href="http://www.opennorth.ca/">Open North</a>.').html_safe %></p>
   </footer>
 
   <% end %>
