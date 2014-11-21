@@ -71,7 +71,9 @@ class Report
         solution = question.solve(value)
 
         bars = ['', '']
-        if solution.nonzero?
+        if solution.zero?
+          solution = solution.abs
+        else
           bar_width = (solution.abs / maximum * bar_cell_width).ceil
 
           if solution < 0
