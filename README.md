@@ -1,5 +1,10 @@
 # Ready Reckoner
 
+[![Build Status](https://secure.travis-ci.org/opennorth/readyreckoner.ca.png)](http://travis-ci.org/opennorth/readyreckoner.ca)
+[![Dependency Status](https://gemnasium.com/opennorth/readyreckoner.ca.png)](https://gemnasium.com/opennorth/readyreckoner.ca)
+[![Coverage Status](https://coveralls.io/repos/opennorth/readyreckoner.ca/badge.png?branch=master)](https://coveralls.io/r/opennorth/readyreckoner.ca)
+[![Code Climate](https://codeclimate.com/github/opennorth/readyreckoner.ca.png)](https://codeclimate.com/github/opennorth/readyreckoner.ca)
+
 ## Development
 
     bundle
