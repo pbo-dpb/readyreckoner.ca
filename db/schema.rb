@@ -80,8 +80,8 @@ ActiveRecord::Schema.define(version: 20141022050318) do
     t.datetime "updated_at"
     t.string   "title",                           default: "", null: false
     t.text     "description",                     default: "", null: false
-    t.text     "modal",                           default: "", null: false
     t.text     "popover",                         default: "", null: false
+    t.text     "modal",                           default: "", null: false
   end
 
   add_index "citizen_budget_model_section_translations", ["citizen_budget_model_section_id"], name: "index_2b79c59d2a47f33d3e927dae21105b97719ec5c0", using: :btree
