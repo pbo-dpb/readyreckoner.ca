@@ -3,3 +3,5 @@ rvm:
   - 2.1.5
 services:
   - redis
+before_script:
+  - psql -c 'create database ready_reckoner_test;' -U postgres
