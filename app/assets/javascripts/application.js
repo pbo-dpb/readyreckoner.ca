@@ -35,15 +35,30 @@ function _(msgid, options) {
 }
 
 /**
+ * Formats a number with a specified number of significant digits.
+ *
+ * @param {Float} number A number
+ * @param {Float} precision The number of significant digits
+ * @return {String} Returns the number with a specified number of significant digits
+ * @see https://github.com/rails/rails/blob/master/activesupport/lib/active_support/number_helper/number_to_rounded_converter.rb
+ */
+function number_to_rounded(number, precision) {
+  var digits = number ? Math.floor(Math.log10(Math.abs(number)) + 1) : 1
+    , multiplier = Math.pow(10, digits - precision);
+  return Math.round(number / multiplier) * multiplier;
+}
+
+/**
  * Formats a number a currency string.
  *
  * @param {Float} number A number
+ * @param {Float} precision The number of significant digits
  * @return {String} Returns the number as a currency string
  * @see https://github.com/rails/rails/blob/master/activesupport/lib/active_support/number_helper/number_to_currency_converter.rb
  * @see https://github.com/rails/rails/blob/master/activesupport/lib/active_support/number_helper/number_to_delimited_converter.rb
  */
-function number_to_currency(number) {
-  var parts = number.toString().split('.');
+function number_to_currency(number, precision) {
+  var parts = number_to_rounded(number, precision).toString().split('.');
   parts[0] = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + _('number.currency.format.delimiter'));
   return _('number.currency.format.format').replace('%n', parts.join(_('number.currency.format.separator'))).replace('%u', _('number.currency.format.unit'));
 }
@@ -112,7 +127,7 @@ $.getJSON('/admin/translations/export/?locale=' + $('html').attr('lang')).done(f
         , css_class = ''
         , number = solution(variables())
         , options = {
-            number: number_to_currency(Math.round(Math.abs(number / 1000000)))
+            number: number_to_currency(Math.round(Math.abs(number / 1000000)), 2)
           , percentage: number_to_percentage(Math.abs(number / total_revenue * 100).toFixed(2))
           };
 
