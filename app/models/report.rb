@@ -129,7 +129,7 @@ class Report
       _('Total revenue impacts'),
       '',
       '',
-      currency_formatter(precision: 0).call(@simulator.solve(@variables) / 1_000_000.0),
+      currency_formatter(precision: 2, significant: true).call(@simulator.solve(@variables) / 1_000_000.0),
       '',
       '',
     ]]
