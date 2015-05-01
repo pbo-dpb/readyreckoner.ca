@@ -32,7 +32,7 @@ GEM
     arel (5.0.1.20140414130214)
     bcrypt (3.1.10)
     builder (3.2.2)
-    citizen_budget_model (0.0.2)
+    citizen_budget_model (0.0.3)
       acts_as_list (~> 0.4.0)
       devise (~> 3.2.4)
       globalize (~> 4.0.2)
@@ -193,7 +193,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  citizen_budget_model (= 0.0.2)
+  citizen_budget_model (= 0.0.3)
   coveralls
   devise-i18n (~> 0.10.4)
   gettext
