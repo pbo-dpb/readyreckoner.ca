@@ -53,7 +53,7 @@
                   <%= render partial: 'popover', locals: {record: question} %>
                 </td>
                 <td class="text-center impact-column">
-                  <%= number_to_currency(question.unit_value_down.abs * question.step / 1_000_000.0, strip_insignificant_zeros: true, precision: 0) %>
+                  <%= number_to_currency((question.unit_value_down.abs + question.unit_value_up.abs) / 2 * question.step / 1_000_000.0, strip_insignificant_zeros: true, precision: 0) %>
                 </td>
                 <td class="widget widget-column">
                   <%= range(question) %>

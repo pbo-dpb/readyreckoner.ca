@@ -43,7 +43,7 @@ function _(msgid, options) {
  * @see https://github.com/rails/rails/blob/master/activesupport/lib/active_support/number_helper/number_to_rounded_converter.rb
  */
 function number_to_rounded(number, precision) {
-  var digits = number ? Math.floor(Math.log10(Math.abs(number)) + 1) : 1
+  var digits = number ? Math.floor(Math.log(Math.abs(number) / Math.log(10)) + 1) : 1
     , multiplier = Math.pow(10, digits - precision);
   return Math.round(number / multiplier) * multiplier;
 }
