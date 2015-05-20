@@ -24,8 +24,24 @@ RSpec.describe PagesController, type: :controller do
     end
 
     describe 'GET print' do
-      it 'returns http success' do
+      it 'returns http success on positive solution' do
         post :print, locale: I18n.default_locale, variables: {var: 5}
+        expect(response).to be_success
+        expect(assigns(:simulator)).to eq(@active)
+        expect(response.header['Content-Disposition']).to eq('inline; filename="Ready_Reckoner_Report.pdf"')
+        expect(response.header['Content-Type']).to eq('application/pdf')
+      end
+
+      it 'returns http success on negative solution' do
+        post :print, locale: I18n.default_locale, variables: {var: -5}
+        expect(response).to be_success
+        expect(assigns(:simulator)).to eq(@active)
+        expect(response.header['Content-Disposition']).to eq('inline; filename="Ready_Reckoner_Report.pdf"')
+        expect(response.header['Content-Type']).to eq('application/pdf')
+      end
+
+      it 'returns http success on zero solution' do
+        post :print, locale: I18n.default_locale, variables: {var: 0}
         expect(response).to be_success
         expect(assigns(:simulator)).to eq(@active)
         expect(response.header['Content-Disposition']).to eq('inline; filename="Ready_Reckoner_Report.pdf"')
