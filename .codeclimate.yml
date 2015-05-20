@@ -1,0 +1,7 @@
+languages:
+  Ruby: true
+  JavaScript: true
+  PHP: true
+exclude_paths:
+- "app/assets/javascripts/jed.js"
+- "public/assets/shims/*"
