@@ -37,6 +37,7 @@ Copy `lumen/bootstrap.min.css` to `app/assets/stylesheets` and change `../fonts`
 
 ### Heroku
 
+    heroku apps:create
     heroku addons:add pgbackups:auto-month
     heroku addons:add rediscloud
     heroku addons:add sendgrid
