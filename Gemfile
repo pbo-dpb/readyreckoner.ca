@@ -10,10 +10,10 @@ gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
 
 # Engines
-gem 'citizen_budget_model', '0.0.3'
+gem 'citizen_budget_model', '0.0.4'
 gem 'gettext'
 gem 'rails-i18n', '~> 4.0.0'
-gem 'devise-i18n', '~> 0.10.4'
+gem 'devise-i18n', '~> 0.12.0'
 
 # PDF generation
 gem 'prawn'
