@@ -48,3 +48,8 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 end
+
+# @see https://github.com/rspec/rspec-rails/issues/1532#issuecomment-174679485
+RSpec::Rails::ViewRendering::EmptyTemplatePathSetDecorator.class_eval do  
+  alias_method :find_all_anywhere, :find_all
+end
