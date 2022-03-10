@@ -1,13 +1,22 @@
 
-> **⚠️  2022-03-10 : ARCHIVE **
+> ⚠️ **2022-03-10: Update**
+> 
 > The rewritten Ready Reckoner has moved to the following repository:
-> Le Simulateur Budgétaire réécrit a été déplacé vers le dépôt de code suivant :
+> 
 > ➡️ https://github.com/pbo-dpb/RR--SB
 > 
 > This repository remains available for informational and research purposes.
+> 
+> ---
+> ⚠️ **2022-03-10 : Mise à jour**
+> 
+> Le Simulateur Budgétaire réécrit a été déplacé vers le dépôt de code suivant :
+> 
+> ➡️ https://github.com/pbo-dpb/RR--SB
+> 
 > Ce dépôt de code demeure disponible à des fins d'information et de recherche.
 
----
+
 
 # Ready Reckoner
 
